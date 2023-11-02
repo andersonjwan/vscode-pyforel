@@ -1,0 +1,105 @@
+{
+	"name": "pyforel",
+	"displayName": "PyFoReL Support",
+	"version": "0.0.1",
+	"description": "The PyFoReL extension provides language support for the development of programs written in PyFoReL.",
+	"author": {
+		"name": "Jacob Anderson",
+		"email": "andersonjwan@gmail.com",
+		"url": "https://www.github.com/andersonjwan"
+	},
+	"keywords": [
+		"temporal logic",
+		"programming languages",
+		"domain-specifc language",
+		"language support",
+		"formal requirements"
+	],
+	"engines": {
+		"vscode": "^1.46.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:pyforel.intro",
+		"onLanguage:pyforel"
+	],
+	"main": "./client/out/extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "PyFoReL configurations",
+			"properties": {
+				"languageServerPyforel.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server at a given time."
+				},
+				"languageServerPyforel.tracer.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VSCode and the language server."
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "pyforel.intro",
+				"title": "PyFoReL program found"
+			}
+		],
+		"languages": [
+			{
+				"id": "pyforel",
+				"aliases": [
+					"PyFoReL",
+					"Pythonic Formal Requirements Language"
+				],
+				"extensions": [
+					".pf"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "pyforel",
+				"scopeName": "source.pyforel",
+				"path": "./client/src/syntaxes/pyforel.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "pyforel",
+				"path": "./pyforel.json"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc --build",
+		"watch": "tsc --build --watch",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+	},
+	"devDependencies": {
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^12.11.7",
+		"@typescript-eslint/eslint-plugin": "^4.14.1",
+		"@typescript-eslint/parser": "^4.14.1",
+		"eslint": "^7.19.0",
+		"mocha": "^10.0.0",
+		"typescript": "^4.1.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://www.github.com/andersonjwan/stpl-dsl-vscode-extension.git"
+	}
+}

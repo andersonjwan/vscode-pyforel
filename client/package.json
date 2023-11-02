@@ -1,0 +1,24 @@
+{
+    "name": "pyforel-client",
+    "description": "PyFoReL VSCode language server client extension",
+    "author": {
+        "name": "Jacob Anderson",
+        "email": "andersonjwan@gmail.com",
+        "url": "https://www.github.com/andersonjwan"
+    },
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://www.github.com/andersonjwan/stpl-dsl-vscode-extension.git"
+    },
+    "engines": {
+        "vscode": "^1.46.0"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^7.0.0"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.46.0",
+        "vscode-test": "^1.5.2"
+    }
+}

@@ -1,0 +1,263 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Pythonic Formal Requirements Language",
+    "patterns": [
+        {
+			"begin": "#",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.comment.pyforel"
+				}
+			},
+			"end": "\\n",
+			"name": "comment.line.number-sign.pyforel"
+		},
+        {
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.pyforel"
+				}
+			},
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.pyforel"
+				}
+			},
+			"name": "string.quoted.double.pyforel"
+		},
+		{
+			"name": "keyword.control.conditional.pyforel",
+			"match": "\\b(if|elif|else)\\b"
+		},
+		{
+			"name": "keyword.control.pyforel.verb",
+			"match": "\\b(verb)\\b"
+		},
+		{
+			"name": "keyword.operator.logical.pyforel",
+			"match": "\\b(and|not|or)\\b"
+		},
+		{
+			"begin": "\\b(exists|forall)\\b",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.existential.pyforel"
+				}
+			},
+			"end": "(\\:)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.freezetime.begin.pyforel"
+				}
+			},
+
+			"name": "meta.freezetime.pyforel",
+			"patterns": [
+				{
+					"match": "\\b(at)\\b",
+					"name": "keyword.control.freezetime.at.pyforel"
+				},
+				{
+					"match": "\\b(time|frame)\\b",
+					"name": "keyword.control.freezetime.freeze.pyforel"
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(release|until)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.temporal.pyforel"
+				}
+			},
+			"end": "\\s*\\n",
+
+			"name": "meta.temporal.binary.pyforel",
+			"patterns": [
+				{
+					"match": "\\b(with)\\b",
+					"name": "keyword.control.statement.pyforel"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"match": "\\b(from|to)\\b",
+					"name": "keyword.control.statement.pyforel"
+				},
+				{
+					"match": "\\b(time|frame)\\b",
+					"name": "keyword.control.temporal.binary.interval.pyforel"
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(eventually|globally|next)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.temporal.pyforel"
+				}
+			},
+			"end": "\\s*(?:(\\:))",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.temporal.begin.pyforel"
+				}
+			},
+
+			"name": "meta.temporal.unary.pyforel",
+			"patterns": [
+				{
+					"include": "#numbers"
+				},
+				{
+					"match": "\\b(from|to)\\b",
+					"name": "keyword.control.statement.pyforel"
+				},
+				{
+					"match": "\\b(time|frame)\\b",
+					"name": "keyword.control.temporal.unary.interval.pyforel"
+				}
+			]
+		},
+		{
+			"begin": "^\\s*(func)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.function.pyforel"
+				}
+			},
+			"end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.parameters.end.pyforel"
+				},
+				"2": {
+					"name": "punctuation.section.function.begin.pyforel"
+				},
+				"3": {
+					"name": "invalid.illegal.missing-section-begin.pyforel"
+				}
+			},
+			
+			"name": "meta.function.pyforel",
+			"patterns": [
+				{
+					"begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+					"contentName": "entity.name.function.pyforel",
+					"end": "(?![A-Za-z0-9_])",
+					"patterns": [
+						{
+							"include": "#name"
+						}
+					]
+				},
+				{
+					"begin": "(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.parameters.begin.pyforel"
+						}
+					},
+					"contentName": "meta.function.parameters.pyforel",
+					"end": "(?=\\)\\s*\\:)",
+					"patterns": [
+						{
+							"include": "#types"
+						},
+						{
+							"captures": {
+								"1": {
+									"name": "variable.parameter.function.pyforel"
+								},
+								"2": {
+									"name": "punctuation.delimeter.parameters.pyforel"
+								}
+							},
+							"match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)]))"
+						}
+					]
+				}
+			]
+		},
+		{
+			"begin": "(?=([A-Za-z_][A-Za-z0-9_]*)\\s*\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.call.pyforel"
+				}
+			},
+			"end": "(\\))",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.arguments.end.pyforel"
+				}
+			},
+		
+			"name": "meta.function.call.pyforel",
+			"patterns": [
+				{
+					"begin": "(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.arguments.begin.pyforel"
+						}
+					},
+					"contentName": "meta.function.call.arguments.pyforel",
+					"end": "(?=\\))"
+				}
+			]
+		},
+		{
+			"include": "#booleans"
+		}
+    ],
+	"repository": {
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.float.pyforel",
+					"match": "\\b(\\d+\\.\\d*)"
+				},
+				{
+					"name": "constant.numeric.integer.decimal.pyforel",
+					"match": "\\b([1-9]+[1-9]*|0)"
+				}
+			]
+		},
+		"booleans": {
+			"patterns": [
+				{
+					"name": "constant.language.pyforel",
+					"match": "\\b(true|false)\\b"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"name": "storage.type.object.pyforel",
+					"match": "(\\b(object)\\b)"
+				},
+				{
+					"name": "storage.type.time.pyforel",
+					"match": "(\\b(time)\\b)"
+				},
+				{
+					"name": "storage.type.frame.pyforel",
+					"match": "(\\b(frame)\\b)"
+				},
+				{
+					"name": "storage.type.constant.pyforel",
+					"match": "(\\b(const)\\b)"
+				}
+			]
+		},
+		"name": {
+			"match": "[A-Za-z_][A-Za-z0-9_]*"
+		}
+	},
+    "scopeName": "source.pyforel"
+}

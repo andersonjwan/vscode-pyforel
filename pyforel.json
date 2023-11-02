@@ -1,0 +1,112 @@
+{
+	"Function Definition": {
+		"prefix": "func",
+		"body": [
+			"func $1($2):",
+			"\t$3"
+		],
+		"description": "Insert function definition"
+	},
+	"If, Elif, Else": {
+		"prefix": "if",
+		"body": [
+			"if $1:",
+			"\t$2",
+			"elif $3:",
+			"\t$4",
+			"else:",
+			"\t$5"
+		],
+		"description": "Insert If, Elif, Else construct"
+	},
+	"If, Else": {
+		"prefix": "if",
+		"body": [
+			"if $1:",
+			"\t$2",
+			"else:",
+			"\t$3"
+		],
+		"description": "Insert If, Else construct"
+	},
+	"Bounded Globally": {
+		"prefix": "globally",
+		"body": [
+			"globally from $1 to $2:",
+			"\t$3"
+		],
+		"description": "Insert bounded globally temporal operator"
+	},
+	"Bounded Eventually": {
+		"prefix": "eventually",
+		"body": [
+			"eventually from $1 to $2:",
+			"\t$3"
+		],
+		"description": "Insert bounded eventually temporal operator"
+	},
+	"Bounded Next": {
+		"prefix": "next",
+		"body": [
+			"next from $1 to $2:",
+			"\t$3"
+		],
+		"description": "Insert bounded next temporal operator"
+	},
+	"Release": {
+		"prefix": "release",
+		"body": [
+			"release $1 with $2",
+			"$0"
+		],
+		"description": "Insert unbounded release temporal operator"
+	},
+	"Bounded Release": {
+		"prefix": "release",
+		"body": [
+			"release $1 with $2 from $3 to $4",
+			"$0"
+		],
+		"description": "Insert bounded release temporal operator"
+	},
+	"Until": {
+		"prefix": "until",
+		"body": [
+			"until $1 with $2",
+			"$0"
+		],
+		"description": "Insert unbounded until temporal operator"
+	},
+	"Bounded Until": {
+		"prefix": "until",
+		"body": [
+			"until $1 with $2 from $3 to $4",
+			"$0"
+		],
+		"description": "Insert bounded until temporal operator"
+	},
+	"FrozenTime Exists": {
+		"prefix": "exists",
+		"body": [
+			"exists ${1:obj} at ${2:t}:",
+			"\t$3"
+		],
+		"description": "Insert FrozenTime exists statement"
+	},
+	"FrozenTime Forall": {
+		"prefix": "forall",
+		"body": [
+			"forall ${1:obj} at ${2:t}:",
+			"\t$3"
+		],
+		"description": "Insert FrozenTime forall statement"
+	},
+	"Verbatim": {
+		"prefix": "verb",
+		"body": [
+			"verb:",
+			"\t\"$1\""
+		],
+		"description": "Insert verbatim statement"
+	}
+}

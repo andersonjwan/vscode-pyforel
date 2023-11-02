@@ -1,0 +1,27 @@
+{
+    "comments": {
+        "lineComment": "#" // single line comment
+    },
+    // symbols used as brackets
+    "brackets": [
+        ["(", ")"],
+        ["[", "]"]
+    ],
+    // symbols that are auto-closed when typing
+    "autoClosingPairs": [
+        {"open": "(", "close": ")"},
+        {"open": "[", "close": "]"},
+        {"open": "\"", "close": "\"", "notIn": ["string"]}
+    ],
+    // symbols that can surround a selection
+    "surroundingPairs": [
+        ["(", ")"],
+        ["[", "]"],
+        ["\"", "\""]    
+    ],
+    // indentation rules to apply
+    "indentationRules": {
+        "increaseIndentPattern": "^((?!\\#).)*(\\:|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
+        "decreaseIndentPattern": "^\\s*[\\)\\]].*$"
+    }
+}
